@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-web
+  name: backend-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-web
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: backend-web
+    spec:
+      containers:
+      - image: marcecardozo/backend-web
+        name: backend-web

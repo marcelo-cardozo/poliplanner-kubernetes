@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: horario-web
+  name: horario-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: horario-web
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: horario-web
+    spec:
+      containers:
+      - image: marcecardozo/horario-web:debug
+        name: horario-web
