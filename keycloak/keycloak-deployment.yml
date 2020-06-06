@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: keycloak
+  name: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - image: jboss/keycloak:9.0.3
+          name: keycloak
+
+          env:
+            - name: DB_VENDOR
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-conf
+                  key: DB_VENDOR
+            - name: KEYCLOAK_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: keycloak-conf
+                  key: KEYCLOAK_IMPORT
+
+            - name: DB_ADDR
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: DB_ADDR
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: DB_DATABASE
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: DB_PASSWORD
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: DB_USER
+            - name: KEYCLOAK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: KEYCLOAK_PASSWORD
+            - name: KEYCLOAK_USER
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: KEYCLOAK_USER
+
+          volumeMounts:
+            - name: keycloak-realm
+              mountPath: /tmp
+      volumes:
+        - name: keycloak-realm
+          configMap:
+            name: keycloak-realm
