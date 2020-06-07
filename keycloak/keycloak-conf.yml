@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
   DB_VENDOR: postgres
-  KEYCLOAK_IMPORT: /tmp/realm.json
+  KEYCLOAK_IMPORT: "/tmp/realm.json -Dkeycloak.profile.feature.upload_scripts=enabled"
 kind: ConfigMap
 metadata:
   name: keycloak-conf
