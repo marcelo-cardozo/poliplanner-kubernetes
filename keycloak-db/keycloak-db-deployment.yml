@@ -1,14 +1,15 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: keycloak-db
   labels:
     app: keycloak-db
+  name: keycloak-db
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: keycloak-db
+  strategy: {}
   template:
     metadata:
       labels:
