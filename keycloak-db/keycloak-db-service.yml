@@ -11,4 +11,4 @@ spec:
       targetPort: 5432
   selector:
     app: keycloak-db
-  type: LoadBalancer
+  type: ClusterIP

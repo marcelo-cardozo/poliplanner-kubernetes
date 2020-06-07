@@ -16,5 +16,5 @@ spec:
         app: horario-web
     spec:
       containers:
-      - image: marcecardozo/horario-web:debug
-        name: horario-web
+        - image: marcecardozo/poliplanner-backend-web:dev
+          name: horario-web

@@ -16,5 +16,5 @@ spec:
         app: backend-web
     spec:
       containers:
-      - image: marcecardozo/backend-web
-        name: backend-web
+        - image: marcecardozo/poliplanner-backend-web:dev
+          name: backend-web
