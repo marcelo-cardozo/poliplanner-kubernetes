@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: horario-db
+  name: horario-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: horario-db
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: horario-db
+    spec:
+      containers:
+        - name: horario-db
+          image: postgres:12.2
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: horario-db-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: horario-db-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: horario-db-secret
+                  key: POSTGRES_PASSWORD
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: horario-storage
+              mountPath: /var/lib/postgresql/data/
+      volumes:
+        - name: horario-storage
+          persistentVolumeClaim:
+            claimName: horario-db-volume-claim
