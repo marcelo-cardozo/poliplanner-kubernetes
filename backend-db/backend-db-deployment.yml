@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-db
+  name: backend-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-db
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: backend-db
+    spec:
+      containers:
+        - name: backend-db
+          image: postgres:12.2
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: backend-db-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: backend-db-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-db-secret
+                  key: POSTGRES_PASSWORD
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: backend-storage
+              mountPath: /var/lib/postgresql/data/
+      volumes:
+        - name: backend-storage
+          persistentVolumeClaim:
+            claimName: backend-db-volume-claim
