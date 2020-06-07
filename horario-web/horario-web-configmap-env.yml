@@ -4,4 +4,4 @@ data:
   PARAMS_DB_URL: horario-db:5432
   PARAMS_KEYCLOAK_URL: http://keycloak:8080
 metadata:
-  name: horario-web
+  name: horario-web-config

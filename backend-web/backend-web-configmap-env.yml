@@ -5,4 +5,4 @@ data:
   PARAMS_KEYCLOAK_URL: http://keycloak:8080
   PARAMS_HORARIO_URL: http://horario-web:8080
 metadata:
-  name: backend-web-configmap-env
+  name: backend-web-config

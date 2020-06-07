@@ -18,3 +18,36 @@ spec:
       containers:
         - image: marcecardozo/poliplanner-backend-web:dev
           name: backend-web
+
+          env:
+            - name: PARAMS_DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-web-config
+                  key: PARAMS_DB_URL
+            - name: PARAMS_KEYCLOAK_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-web-config
+                  key: PARAMS_KEYCLOAK_URL
+            - name: PARAMS_HORARIO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-web-config
+                  key: PARAMS_HORARIO_URL
+
+            - name: PARAMS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-web-secret
+                  key: PARAMS_DB_NAME
+            - name: PARAMS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-web-secret
+                  key: PARAMS_DB_PASSWORD
+            - name: PARAMS_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-web-secret
+                  key: PARAMS_DB_USERNAME
