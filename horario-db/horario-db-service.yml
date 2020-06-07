@@ -6,7 +6,7 @@ metadata:
   name: horario-db
 spec:
   ports:
-    - port: 5433
+    - port: 5432
       protocol: TCP
       targetPort: 5432
   selector:
