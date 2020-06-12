@@ -10,7 +10,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: hostpath
   selector:
     matchLabels:
       volume: horario-db-volume
