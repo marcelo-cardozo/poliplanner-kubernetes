@@ -38,4 +38,4 @@ docker-compose -f docker-compose.build.yml push
 
 ```
 
-Luego sería necesario los deployments de tal modo a que esten enlazados a las imágenes propias.
+Luego es necesario modificar los deployments de tal modo a que coincidan con imágenes propias.
